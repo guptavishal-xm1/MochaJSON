@@ -14,8 +14,10 @@ import java.util.Map;
 /**
  * Jackson-based implementation of JsonMapper.
  * Uses Jackson Databind for JSON serialization and deserialization.
+ * This is the default JSON mapper in MochaJSON v1.3.0+.
  * 
  * @since 1.1.0 Enhanced with security hardening and improved error handling
+ * @since 1.3.0 Made the default JSON mapper
  */
 public class JacksonJsonMapper implements JsonMapper {
     

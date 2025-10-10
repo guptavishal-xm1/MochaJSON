@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
  * Utility class for URL validation and security checks.
  * 
  * @since 1.1.0
+ * @since 1.3.0 Simplified security configuration
  */
 public class Utils {
     

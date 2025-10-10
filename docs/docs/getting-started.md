@@ -1,17 +1,18 @@
 ---
 title: Getting Started with MochaJSON
-description: Get up and running with MochaJSON v1.2.0 in minutes. Learn installation, basic usage, and production-grade features like connection pooling, retry mechanisms, and circuit breakers.
+description: Get up and running with MochaJSON v1.3.0 in minutes. Learn installation, basic usage, and simplified features like basic retry and security controls.
 keywords:
   - MochaJSON installation
   - MochaJSON setup
   - Java HTTP client tutorial
   - Kotlin HTTP client
   - getting started
+  - simplified
 ---
 
 # Getting Started with MochaJSON
 
-Welcome to MochaJSON v1.2.0! This guide will help you get up and running with the library in just a few minutes, including the new production-grade features like connection pooling, retry mechanisms, and circuit breakers.
+Welcome to MochaJSON v1.3.0! This guide will help you get up and running with the library in just a few minutes, including the simplified features like basic retry and security controls.
 
 ## Installation
 
@@ -32,7 +33,7 @@ Or if you're using Groovy syntax:
 
 ```gradle
 dependencies {
-    implementation 'io.github.guptavishal-xm1:MochaJSON:1.2.0'
+    implementation 'io.github.guptavishal-xm1:MochaJSON:1.3.0'
     
     // Optional: For logging support
     implementation 'org.slf4j:slf4j-api:2.0.9'
@@ -47,7 +48,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.guptavishal-xm1</groupId>
     <artifactId>MochaJSON</artifactId>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
 </dependency>
 
 <!-- Optional: For logging support -->
@@ -81,14 +82,12 @@ public class Main {
             System.out.println("User Name: " + user.get("name"));
             System.out.println("User Email: " + user.get("email"));
             
-            // Advanced usage with v1.2.0 production features
+            // Advanced usage with v1.3.0 simplified features
             ApiClient client = new ApiClient.Builder()
                 .connectTimeout(Duration.ofSeconds(10))
                 .readTimeout(Duration.ofSeconds(30))
-                .enableConnectionPooling()        // 🆕 Connection reuse
-                .enableRetryPolicy()              // 🆕 Automatic retries
-                .enableCircuitBreaker()           // 🆕 Fault tolerance
-                .enableCaching()                  // 🆕 HTTP caching
+                .enableRetry()                    // 🆕 Simple retry with 3 attempts
+                .allowLocalhost(true)             // 🆕 Development-friendly security
                 .enableLogging()
                 .build();
             
@@ -128,14 +127,12 @@ fun main() {
         println("User Name: ${user["name"]}")
         println("User Email: ${user["email"]}")
         
-        // Advanced usage with v1.2.0 production features
+        // Advanced usage with v1.3.0 simplified features
         val client = ApiClient.Builder()
             .connectTimeout(Duration.ofSeconds(10))
             .readTimeout(Duration.ofSeconds(30))
-            .enableConnectionPooling()        // 🆕 Connection reuse
-            .enableRetryPolicy()              // 🆕 Automatic retries
-            .enableCircuitBreaker()           // 🆕 Fault tolerance
-            .enableCaching()                  // 🆕 HTTP caching
+            .enableRetry()                    // 🆕 Simple retry with 3 attempts
+            .allowLocalhost(true)             // 🆕 Development-friendly security
             .enableLogging()
             .build()
         
@@ -180,7 +177,7 @@ Now that you have MochaJSON installed and working, explore these guides:
 - **[JSON Handling](/MochaJSON/usage/json-handling)** - Advanced JSON parsing techniques and edge cases
 
 ### 🔧 Advanced Features
-- **[Advanced Features](/MochaJSON/advanced/interceptors)** - Production-grade features overview
+- **[Advanced Features](/MochaJSON/advanced-features)** - Simplified features overview
 - **[Interceptors](/MochaJSON/advanced/interceptors)** - Request/response interceptors for authentication and logging
 
 ### ✅ Best Practices

@@ -7,6 +7,8 @@ import java.util.Map;
 /**
  * Represents the response from an HTTP API request.
  * Provides convenient methods for accessing response data and converting to different formats.
+ * 
+ * @since 1.1.0
  */
 public class ApiResponse {
     

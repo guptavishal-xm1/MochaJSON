@@ -22,6 +22,7 @@ import java.util.function.Consumer;
  * </pre>
  * 
  * @since 1.1.0 Enhanced with virtual threads and improved async support
+ * @since 1.3.0 Simplified API with improved resource management
  */
 public class Api {
     
@@ -177,6 +178,7 @@ public class Api {
      * Falls back to cached thread pool for older Java versions.
      * 
      * @return the default executor
+     * @since 1.3.0
      */
     private static Executor createDefaultExecutor() {
         try {
@@ -192,6 +194,8 @@ public class Api {
      * Shuts down the API and releases all resources.
      * This method is called automatically when the JVM shuts down.
      * It can also be called manually to clean up resources.
+     * 
+     * @since 1.3.0
      */
     public static synchronized void shutdown() {
         if (shutdown) {
@@ -236,6 +240,7 @@ public class Api {
      * Checks if the API has been shut down.
      * 
      * @return true if shut down, false otherwise
+     * @since 1.3.0
      */
     public static boolean isShutdown() {
         return shutdown;

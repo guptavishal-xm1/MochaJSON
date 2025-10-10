@@ -20,8 +20,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'MochaJSON — Unified HTTP + JSON Client for Java & Kotlin',
-  tagline: 'Lightweight, fluent, and modern HTTP + JSON library for developers',
+  title: 'MochaJSON — Simplified HTTP + JSON Client for Java & Kotlin',
+  tagline: 'Simple, lightweight, and focused HTTP + JSON library for developers',
   favicon: 'img/favicon.ico',
 
   // Production URL configuration for GitHub Pages
@@ -89,15 +89,15 @@ const config = {
       // Comprehensive SEO metadata
       metadata: [
         // Basic SEO meta tags
-        { name: 'keywords', content: 'MochaJSON, Java HTTP client, Kotlin JSON parser, OkHttp alternative, Gson alternative, fluent API, REST client Java, async HTTP, virtual threads Java 21, connection pooling, retry mechanism, circuit breaker, HTTP caching, file operations' },
-        { name: 'description', content: 'MochaJSON is a unified HTTP and JSON library for Java and Kotlin — fast, fluent, and lightweight for modern API integrations. Replace OkHttp + Gson with one dependency.' },
+        { name: 'keywords', content: 'MochaJSON, Java HTTP client, Kotlin JSON parser, OkHttp alternative, Gson alternative, fluent API, REST client Java, async HTTP, virtual threads Java 21, simple retry, lightweight, focused, easy to use' },
+        { name: 'description', content: 'MochaJSON is a simplified HTTP and JSON library for Java and Kotlin — simple, lightweight, and focused on essential features. Replace OkHttp + Gson with one dependency.' },
         { name: 'author', content: 'Vishal Gupta' },
         { name: 'robots', content: 'index, follow' },
         { name: 'googlebot', content: 'index, follow' },
         
         // Open Graph tags for social sharing
-        { property: 'og:title', content: 'MochaJSON — Unified HTTP + JSON Client for Java & Kotlin' },
-        { property: 'og:description', content: 'Lightweight fluent Java & Kotlin library for handling HTTP and JSON effortlessly. Perfect alternative to OkHttp + Gson with v1.2.0 features.' },
+        { property: 'og:title', content: 'MochaJSON — Simplified HTTP + JSON Client for Java & Kotlin' },
+        { property: 'og:description', content: 'Simple, lightweight Java & Kotlin library for handling HTTP and JSON effortlessly. Perfect alternative to OkHttp + Gson with v1.3.0 simplified features.' },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://guptavishal-xm1.github.io/MochaJSON/' },
         { property: 'og:image', content: 'https://guptavishal-xm1.github.io/MochaJSON/img/social-card.jpg' },
@@ -108,8 +108,8 @@ const config = {
         
         // Twitter Card tags
         { property: 'twitter:card', content: 'summary_large_image' },
-        { property: 'twitter:title', content: 'MochaJSON — Unified HTTP + JSON Client' },
-        { property: 'twitter:description', content: 'Simplify your Java and Kotlin API development with MochaJSON v1.2.0. One library to replace OkHttp + Gson with advanced features.' },
+        { property: 'twitter:title', content: 'MochaJSON — Simplified HTTP + JSON Client' },
+        { property: 'twitter:description', content: 'Simplify your Java and Kotlin API development with MochaJSON v1.3.0. One library to replace OkHttp + Gson with essential features only.' },
         { property: 'twitter:image', content: 'https://guptavishal-xm1.github.io/MochaJSON/img/social-card.jpg' },
         { property: 'twitter:creator', content: '@guptavishal_xm1' },
         { property: 'twitter:site', content: '@guptavishal_xm1' },

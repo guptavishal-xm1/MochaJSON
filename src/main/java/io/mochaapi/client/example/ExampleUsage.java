@@ -8,7 +8,9 @@ import java.util.List;
 
 /**
  * Example usage of MochaJSON client library.
- * Demonstrates the simplified API with core features.
+ * Demonstrates the simplified API with core features in v1.3.0.
+ * 
+ * @since 1.3.0
  */
 public class ExampleUsage {
     

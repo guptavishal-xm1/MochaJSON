@@ -1,6 +1,7 @@
 package io.mochaapi.client;
 
 import io.mochaapi.client.internal.DefaultHttpClientEngine;
+import io.mochaapi.client.internal.Utils;
 import io.mochaapi.client.exception.ApiException;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -19,8 +20,9 @@ import java.util.function.Consumer;
  * ApiClient client = new ApiClient.Builder()
  *     .connectTimeout(Duration.ofSeconds(10))
  *     .readTimeout(Duration.ofSeconds(30))
+ *     .enableRetry()  // Simple retry with 3 attempts, 1-second delay
+ *     .allowLocalhost(true)  // Allow localhost for development
  *     .enableLogging()
- *     .addRequestInterceptor(RequestInterceptor.bearerAuth(() -> getToken()))
  *     .build();
  * 
  * ApiResponse response = client.get("https://api.example.com/data")
@@ -29,6 +31,7 @@ import java.util.function.Consumer;
  * </pre>
  * 
  * @since 1.2.0
+ * @since 1.3.0 Simplified API with BasicRetry and simplified security configuration
  */
 public class ApiClient {
     
@@ -303,6 +306,7 @@ public class ApiClient {
          * Enables basic retry with standard configuration (3 attempts, 1-second delay).
          * 
          * @return this builder for chaining
+         * @since 1.3.0
          */
         public Builder enableRetry() {
             this.retry = BasicRetry.standard();
@@ -315,6 +319,7 @@ public class ApiClient {
          * @param maxAttempts maximum number of attempts
          * @param delay delay between attempts
          * @return this builder for chaining
+         * @since 1.3.0
          */
         public Builder enableRetry(int maxAttempts, Duration delay) {
             this.retry = new BasicRetry(maxAttempts, delay);
@@ -323,9 +328,11 @@ public class ApiClient {
         
         /**
          * Allows localhost URLs (useful for development).
+         * By default, localhost URLs are blocked for security in production.
          * 
-         * @param allowLocalhost true to allow localhost URLs
+         * @param allowLocalhost true to allow localhost URLs, false to block them
          * @return this builder for chaining
+         * @since 1.3.0
          */
         public Builder allowLocalhost(boolean allowLocalhost) {
             this.allowLocalhost = allowLocalhost;

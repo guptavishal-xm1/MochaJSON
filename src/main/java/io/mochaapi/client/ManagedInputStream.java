@@ -17,6 +17,7 @@ import java.io.InputStream;
  * </pre>
  * 
  * @since 1.2.0
+ * @since 1.3.0 Enhanced for simplified API
  */
 public class ManagedInputStream extends InputStream implements AutoCloseable {
     
@@ -76,7 +77,11 @@ public class ManagedInputStream extends InputStream implements AutoCloseable {
     
     @Override
     public synchronized void mark(int readlimit) {
-        checkClosed();
+        try {
+            checkClosed();
+        } catch (IOException e) {
+            throw new RuntimeException("Stream has been closed", e);
+        }
         delegate.mark(readlimit);
     }
     

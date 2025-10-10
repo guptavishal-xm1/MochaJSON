@@ -1,7 +1,7 @@
 ---
 title: MochaJSON — Unified HTTP & JSON Client for Java & Kotlin
 slug: /
-description: MochaJSON v1.2.0 is a production-ready HTTP client with automatic JSON parsing for Java & Kotlin. Features connection pooling, retry mechanisms, circuit breakers, HTTP caching, and file operations. Replace OkHttp + Gson with one dependency.
+description: MochaJSON v1.3.0 is a simplified, focused HTTP client with automatic JSON parsing for Java & Kotlin. Features simple retry, security controls, and essential HTTP operations. Replace OkHttp + Gson with one lightweight dependency.
 keywords: 
   - MochaJSON
   - Java HTTP client
@@ -12,32 +12,29 @@ keywords:
   - REST client Java
   - async HTTP
   - virtual threads Java 21
-  - connection pooling
-  - retry mechanism
-  - circuit breaker
-  - HTTP caching
-  - file operations
+  - simple retry
+  - lightweight
+  - focused
+  - easy to use
 image: /img/social-card.jpg
 ---
 
 # MochaJSON — Unified HTTP & JSON Client for Java & Kotlin
 
-**The simplest way to make HTTP requests and parse JSON in Java & Kotlin - Now with v1.2.0 featuring production-grade features like connection pooling, retry mechanisms, and circuit breakers!**
+**The simplest way to make HTTP requests and parse JSON in Java & Kotlin - Now with v1.3.0 featuring a simplified, focused API with essential features only!**
 
-Stop juggling OkHttp, Gson, and custom parsers. MochaJSON v1.2.0 unifies HTTP requests and JSON parsing into a single, fluent API that works seamlessly across both Java and Kotlin projects. This lightweight library eliminates boilerplate while providing enterprise-grade performance and resilience features.
+Stop juggling OkHttp, Gson, and custom parsers. MochaJSON v1.3.0 unifies HTTP requests and JSON parsing into a single, fluent API that works seamlessly across both Java and Kotlin projects. This lightweight library eliminates boilerplate while focusing on simplicity and ease of use.
 
 ```java
 // Basic usage - One line to rule them all
 Map<String, Object> user = Api.get("https://api.github.com/users/octocat").execute().toMap();
 
-// Advanced usage with v1.2.0 production features
+// Advanced usage with v1.3.0 simplified features
 ApiClient client = new ApiClient.Builder()
     .connectTimeout(Duration.ofSeconds(10))
     .readTimeout(Duration.ofSeconds(30))
-    .enableConnectionPooling()        // 🆕 Connection reuse
-    .enableRetryPolicy()              // 🆕 Automatic retries
-    .enableCircuitBreaker()           // 🆕 Fault tolerance
-    .enableCaching()                  // 🆕 HTTP caching
+    .enableRetry()                    // 🆕 Simple retry with 3 attempts
+    .allowLocalhost(true)             // 🆕 Development-friendly security
     .addRequestInterceptor(RequestInterceptor.bearerAuth(() -> getToken()))
     .build();
 
@@ -74,8 +71,8 @@ Response response = client.newCall(request).execute();
 String json = response.body().string();
 User user = gson.fromJson(json, User.class);
 
-// MochaJSON approach: 1 line with automatic JSON parsing + production features
-User user = Api.get("/api/user/123").execute().toObject(User.class);
+// MochaJSON approach: 1 line with automatic JSON parsing + simplified features
+User user = Api.get("/api/user/123").execute().to(User.class);
 ```
 
 ## MochaJSON vs Traditional Java HTTP Client Stack
@@ -91,12 +88,11 @@ User user = Api.get("/api/user/123").execute().toObject(User.class);
 | Heavy dependencies | Lightweight footprint |
 | Manual timeout configuration | Configurable timeouts with builder pattern |
 | No built-in interceptors | Request/Response interceptors |
-| Limited security features | Enhanced security with URL validation |
-| Manual connection pooling | 🆕 Automatic connection pooling |
-| No retry mechanism | 🆕 Built-in retry with exponential backoff |
-| No circuit breaker | 🆕 Circuit breaker for fault tolerance |
-| No HTTP caching | 🆕 LRU cache with TTL support |
-| No file operations | 🆕 Multipart upload/download |
+| Limited security features | Simple security controls |
+| Manual connection pooling | 🆕 Automatic connection pooling (Java HttpClient) |
+| No retry mechanism | 🆕 Simple retry with fixed delay |
+| Complex configuration | 🆕 Simplified configuration |
+| Verbose setup | 🆕 Minimal setup required |
 
 ## Core Features of MochaJSON
 
@@ -127,19 +123,19 @@ Compile-time type checking with generic support for POJOs and collections. Type 
 ### ⚖️ **Lightweight Performance**
 Minimal dependencies and small footprint compared to traditional HTTP client stacks. Faster than OkHttp + Gson.
 
-### 🆕 **New in v1.2.0**
-- **Connection Pooling**: HTTP connection reuse with configurable pool size and keep-alive duration
-- **Retry Mechanism**: Exponential backoff retry policy with selective retry conditions
-- **Circuit Breaker**: Fault tolerance pattern with automatic recovery (CLOSED/OPEN/HALF_OPEN states)
-- **HTTP Caching**: LRU cache with TTL support and disk storage for better performance
-- **File Operations**: Multipart file upload and download with streaming support
-- **Enhanced Security**: URL validation and hardened JSON parsing to prevent security vulnerabilities
+### 🆕 **New in v1.3.0**
+- **Simplified API**: Removed complex features to focus on core HTTP + JSON functionality
+- **Basic Retry**: Simple retry mechanism with configurable attempts and fixed delay
+- **Security Controls**: Simple localhost access control for development vs production
+- **Lightweight**: Reduced library size and complexity for better performance
+- **Focused**: Essential features only - no enterprise bloat
 
-### ✨ **Previous Features (v1.1.0)**
+### ✨ **Core Features**
 - Virtual threads support for Java 21+
 - Request/Response interceptors
 - Configurable timeouts with builder pattern
-- Enhanced security features
+- Automatic JSON parsing
+- Async operations with CompletableFuture
 - Improved async APIs with CompletableFuture
 
 ## Installation & Setup
@@ -149,7 +145,7 @@ Minimal dependencies and small footprint compared to traditional HTTP client sta
 Add MochaJSON to your Java or Kotlin project with Gradle:
 
 ```gradle
-implementation("io.github.guptavishal-xm1:MochaJSON:1.2.0")
+implementation("io.github.guptavishal-xm1:MochaJSON:1.3.0")
 ```
 
 ### Maven
@@ -160,7 +156,7 @@ Include MochaJSON in your Maven project:
 <dependency>
     <groupId>io.github.guptavishal-xm1</groupId>
     <artifactId>MochaJSON</artifactId>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
 </dependency>
 ```
 

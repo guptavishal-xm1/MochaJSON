@@ -57,9 +57,10 @@ try (Response response = client.newCall(request).execute()) {
 
 **MochaJSON approach:**
 ```java
-// Setup (optional - defaults work great)
+// Setup (optional - defaults work great) - Simplified API
 ApiClient client = new ApiClient.Builder()
     .connectTimeout(Duration.ofSeconds(30))
+    .enableRetry()                    // Simple retry with 3 attempts
     .enableLogging()
     .addRequestInterceptor(RequestInterceptor.bearerAuth(() -> token))
     .build();
@@ -80,11 +81,11 @@ User user = client.get("https://api.github.com/users/octocat")
 | **Error Handling** | Manual try-catch | Automatic exception mapping |
 | **Async Support** | Complex callback setup | Built-in CompletableFuture |
 | **Virtual Threads** | Not supported | ✅ Java 21+ support |
-| **Connection Pooling** | Manual configuration | ✅ Automatic with v1.2.0 |
-| **Retry Logic** | Manual implementation | ✅ Built-in with v1.2.0 |
-| **Circuit Breaker** | Not included | ✅ Built-in with v1.2.0 |
-| **HTTP Caching** | Manual implementation | ✅ Built-in with v1.2.0 |
-| **File Operations** | Complex multipart setup | ✅ Simple API with v1.2.0 |
+| **Connection Pooling** | Manual configuration | ✅ Automatic (Java HttpClient) |
+| **Retry Logic** | Manual implementation | ✅ Simple retry with v1.3.0 |
+| **Configuration** | Complex setup required | ✅ Simplified with v1.3.0 |
+| **Security Controls** | Manual implementation | ✅ Simple localhost control |
+| **File Operations** | Complex multipart setup | ✅ Simple API |
 | **Kotlin Support** | Works but not optimized | ✅ First-class Kotlin support |
 | **Learning Curve** | Steep (multiple APIs) | ✅ Gentle (single API) |
 
@@ -120,7 +121,7 @@ public class UserService {
 }
 ```
 
-**After (MochaJSON):**
+**After (MochaJSON v1.3.0):**
 ```java
 public class UserService {
     private final ApiClient client;
@@ -128,6 +129,8 @@ public class UserService {
     public UserService() {
         this.client = new ApiClient.Builder()
             .connectTimeout(Duration.ofSeconds(30))
+            .enableRetry()                    // Simple retry with 3 attempts
+            .allowLocalhost(true)             // Development-friendly
             .build();
     }
     
@@ -328,7 +331,7 @@ Based on real-world testing with typical API workloads:
 - ✅ **70% less code** - Simple fluent API
 - ✅ **Better JSON support** - Automatic parsing and serialization
 - ✅ **Modern Java features** - Virtual threads, streams, optionals
-- ✅ **Production ready** - Built-in resilience patterns
+- ✅ **Simplified design** - Essential features only, easy to understand
 
 ## When to Use MochaJSON
 
@@ -343,7 +346,7 @@ Based on real-world testing with typical API workloads:
 ### ❌ Consider Alternatives For:
 - **GraphQL** - Use dedicated GraphQL clients
 - **WebSocket** - Use WebSocket-specific libraries
-- **File streaming** - For very large files, consider specialized libraries
+- **Complex enterprise features** - Circuit breakers, advanced caching, etc.
 - **Legacy systems** - When you need specific protocol support
 
 ## Next Steps

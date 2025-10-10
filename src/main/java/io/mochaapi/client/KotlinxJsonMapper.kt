@@ -15,7 +15,11 @@ import kotlin.reflect.KClass
  * Uses Kotlinx Serialization for JSON serialization and deserialization.
  * Provides seamless integration with Kotlin data classes.
  * 
+ * Note: This is an optional mapper as of v1.3.0. Jackson is the default mapper.
+ * Requires kotlinx-serialization-json dependency.
+ * 
  * @since 1.1.0 Enhanced with improved generic type handling and security
+ * @since 1.3.0 Made optional dependency (Jackson is default)
  */
 class KotlinxJsonMapper : JsonMapper {
     
@@ -38,12 +42,8 @@ class KotlinxJsonMapper : JsonMapper {
      * Creates a new KotlinxJsonMapper with a custom Json instance.
      * 
      * @param customJson the custom Json instance
-     * @throws IllegalArgumentException if customJson is null
      */
     constructor(customJson: Json) : super() {
-        if (customJson == null) {
-            throw IllegalArgumentException("Custom Json instance cannot be null")
-        }
         this.json = customJson
     }
     
@@ -62,6 +62,7 @@ class KotlinxJsonMapper : JsonMapper {
         }
     }
     
+    @Suppress("UNCHECKED_CAST")
     override fun <T> parse(jsonString: String, type: Class<T>): T {
         return try {
             when (type) {

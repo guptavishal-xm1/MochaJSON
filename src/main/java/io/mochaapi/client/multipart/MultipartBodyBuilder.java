@@ -11,7 +11,7 @@ import java.util.UUID;
  * Handles the encoding of files and form fields into the multipart format.
  * 
  * <p><strong>Warning:</strong> This implementation loads entire files into memory.
- * For large files, use {@link StreamingMultipartBuilder} instead.</p>
+ * For very large files, consider using direct HttpClient streaming or external libraries.</p>
  * 
  * @since 1.2.0
  */

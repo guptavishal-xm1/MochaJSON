@@ -27,6 +27,8 @@ import java.util.function.Consumer;
  *     .body(requestData)
  *     .execute();
  * </pre>
+ * 
+ * @since 1.1.0
  */
 public class ApiRequest {
     
@@ -54,7 +56,7 @@ public class ApiRequest {
         this.client = client;
         
         // Set default headers
-        this.headers.put("User-Agent", "MochaAPI-Client/1.2.0");
+        this.headers.put("User-Agent", "MochaAPI-Client/1.3.0");
         this.headers.put("Accept", "application/json");
     }
     
@@ -73,7 +75,7 @@ public class ApiRequest {
         this.client = null; // Will use static Api methods
         
         // Set default headers
-        this.headers.put("User-Agent", "MochaAPI-Client/1.2.0");
+        this.headers.put("User-Agent", "MochaAPI-Client/1.3.0");
         this.headers.put("Accept", "application/json");
     }
     

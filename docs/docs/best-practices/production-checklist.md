@@ -29,29 +29,29 @@ ApiClient client = new ApiClient.Builder()
 
 ### Connection Pooling
 ```java
-ApiClient client = new ApiClient.Builder()
-    // ✅ Enable connection pooling for better performance
-    .enableConnectionPooling()
-    .build();
+// ✅ Connection pooling is handled automatically by Java HttpClient
+// No configuration needed - the underlying HttpClient manages connections efficiently
 ```
 
-**Why:** Reuses connections, reduces latency, and improves throughput.
+**Why:** Java HttpClient automatically handles connection pooling, reducing latency and improving throughput.
 
 ### Security Configuration
 ```java
 ApiClient client = new ApiClient.Builder()
-    // ✅ Use production-safe security settings (blocks localhost/private IPs)
-    .securityConfig(SecurityConfig.forProduction())
+    // ✅ Use production-safe security settings (blocks localhost by default)
+    .allowLocalhost(false)  // Block localhost URLs in production
     .build();
 ```
 
-**Why:** Prevents SSRF attacks and ensures production security.
+**Why:** Prevents SSRF attacks by blocking localhost and private IP access.
 
 ### Retry Configuration
 ```java
 ApiClient client = new ApiClient.Builder()
-    // ✅ Enable retry for transient failures
-    .enableRetryPolicy()
+    // ✅ Enable simple retry for transient failures
+    .enableRetry()  // 3 attempts with 1-second delay
+    // Or customize:
+    .enableRetry(5, Duration.ofSeconds(2))  // 5 attempts with 2-second delay
     .build();
 ```
 
@@ -66,23 +66,17 @@ try (ManagedInputStream stream = client.get(url).downloadStream()) {
 } // Stream is automatically closed
 
 // ✅ For development, allow localhost access
-Utils.setDefaultSecurityConfig(SecurityConfig.forDevelopment());
+ApiClient devClient = new ApiClient.Builder()
+    .allowLocalhost(true)
+    .build();
 
 // ✅ For production, use strict security
-Utils.setDefaultSecurityConfig(SecurityConfig.forProduction());
-```
-
-**Why:** Prevents memory leaks and ensures proper resource cleanup.
-
-### Circuit Breaker
-```java
-ApiClient client = new ApiClient.Builder()
-    // ✅ Enable circuit breaker for fault tolerance
-    .enableCircuitBreaker()
+ApiClient prodClient = new ApiClient.Builder()
+    .allowLocalhost(false)
     .build();
 ```
 
-**Why:** Prevents cascading failures and protects downstream services.
+**Why:** Prevents memory leaks and ensures proper resource cleanup.
 
 ## ✅ Error Handling Checklist
 
@@ -242,11 +236,11 @@ public User getUser(String id) {
 
 ## ✅ Performance Checklist
 
-### Caching Strategy
+### Performance Monitoring
 ```java
 ApiClient client = new ApiClient.Builder()
-    // ✅ Enable HTTP caching for better performance
-    .enableCaching()
+    // ✅ Enable logging for performance monitoring
+    .enableLogging()
     .build();
 ```
 
@@ -276,8 +270,8 @@ public CompletableFuture<User> getUserAsync(String id) {
 public class UserService {
     // ✅ Singleton pattern for client reuse
     private static final ApiClient client = new ApiClient.Builder()
-        .enableConnectionPooling()
-        .enableCaching()
+        .enableRetry()
+        .enableLogging()
         .build();
     
     // ✅ Don't create new clients for each request
@@ -449,29 +443,19 @@ ApiClient client = new ApiClient.Builder()
 
 ## ✅ Performance Tuning
 
-### Connection Pool Tuning
+### Performance Tuning
 ```java
 ApiClient client = new ApiClient.Builder()
-    // ✅ Tune connection pool for your workload
-    .connectionPool(ConnectionPoolConfig.builder()
-        .maxIdle(20)                    // Maximum idle connections
-        .maxTotal(50)                   // Maximum total connections
-        .keepAlive(Duration.ofMinutes(5)) // Connection keep-alive
-        .build())
+    // ✅ Optimize for your workload
+    .connectTimeout(Duration.ofSeconds(10))
+    .readTimeout(Duration.ofSeconds(30))
+    .enableRetry(3, Duration.ofSeconds(1))
+    .enableLogging()
     .build();
 ```
 
-### Cache Configuration
-```java
-ApiClient client = new ApiClient.Builder()
-    // ✅ Configure cache for your use case
-    .cache(CacheConfig.builder()
-        .maxSize(1000)                  // Maximum cache entries
-        .ttl(Duration.ofMinutes(10))    // Cache TTL
-        .diskStorage(true)              // Enable disk storage
-        .build())
-    .build();
-```
+**Note:** Connection pooling is handled automatically by Java HttpClient - no manual configuration needed.
+
 
 ## ✅ Final Verification
 
@@ -481,7 +465,7 @@ Before deploying to production:
 - [ ] **Error handling** - Comprehensive exception handling implemented
 - [ ] **Logging enabled** - Structured logging with appropriate levels
 - [ ] **Security hardened** - HTTPS, input validation, secure authentication
-- [ ] **Performance optimized** - Connection pooling, caching, async operations
+- [ ] **Performance optimized** - Simple retry, async operations, resource management
 - [ ] **Monitoring setup** - Health checks and metrics collection
 - [ ] **Tests passing** - Unit and integration tests cover critical paths
 - [ ] **Documentation updated** - API documentation and runbooks current

@@ -20,7 +20,7 @@ const Hero = () => {
           </span>
           <span className="badge badge-purple">
             <span className="hero-badge-icon">🚀</span>
-            v1.2.0
+            v1.3.0
           </span>
         </div>
 
@@ -31,12 +31,12 @@ const Hero = () => {
         
         {/* Subtitle */}
         <p className="text-xl md:text-2xl text-gray-200 mb-8 hero-subtitle">
-          Unified HTTP & JSON Library for Java & Kotlin
+          Simplified HTTP & JSON Library for Java & Kotlin
         </p>
         
         {/* Description */}
         <p className="text-lg text-gray-300 mb-12 max-w-2xl mx-auto">
-          Fast, simple, and chainable API calls with automatic JSON parsing, zero boilerplate, and production-grade features like connection pooling, retry mechanisms, and circuit breakers.
+          Fast, simple, and chainable API calls with automatic JSON parsing, zero boilerplate, and essential features like simple retry, security controls, and async operations.
         </p>
 
         {/* CTA Buttons */}
@@ -74,11 +74,10 @@ Map<String, Object> user = Api.get("https://api.github.com/users/octocat")
 
 System.out.println("User: " + user.get("name"));
 
-// Advanced usage with v1.2.0 features
+// Advanced usage with v1.3.0 simplified features
 ApiClient client = new ApiClient.Builder()
-    .enableConnectionPooling()
-    .enableRetryPolicy()
-    .enableCircuitBreaker()
+    .enableRetry()                    // Simple retry with 3 attempts
+    .allowLocalhost(true)             // Development-friendly
     .build();
 
 CompletableFuture<ApiResponse> future = client.get("https://api.github.com/user")
