@@ -1,0 +1,50 @@
+# Robots.txt for MochaJSON Documentation
+# Optimized for search engine crawling and AI indexing
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /_next/
+Disallow: /api/
+
+# Allow all documentation pages
+Allow: /getting-started
+Allow: /usage/
+Allow: /api/
+Allow: /contributing
+Allow: /license
+
+# Sitemap location
+Sitemap: https://guptavishal-xm1.github.io/MochaJSON/sitemap.xml
+
+# Crawl delay (optional - helps prevent server overload)
+Crawl-delay: 1
+
+# Specific bot instructions
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# AI crawlers (for AI model training)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /

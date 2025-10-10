@@ -1,0 +1,310 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #7c3aed;
+  --ifm-color-primary-dark: #6d28d9;
+  --ifm-color-primary-darker: #5b21b6;
+  --ifm-color-primary-darkest: #4c1d95;
+  --ifm-color-primary-light: #8b5cf6;
+  --ifm-color-primary-lighter: #a78bfa;
+  --ifm-color-primary-lightest: #c4b5fd;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #a78bfa;
+  --ifm-color-primary-dark: #8b5cf6;
+  --ifm-color-primary-darker: #7c3aed;
+  --ifm-color-primary-darkest: #6d28d9;
+  --ifm-color-primary-light: #c4b5fd;
+  --ifm-color-primary-lighter: #ddd6fe;
+  --ifm-color-primary-lightest: #ede9fe;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Custom styles for MochaAPI Client */
+
+/* Hero section gradient */
+.hero-gradient {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #0f172a 100%);
+}
+
+/* Feature cards */
+.feature-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon sizing */
+.feature-icon {
+  font-size: 1.25rem; /* text-xl equivalent */
+  line-height: 1;
+}
+
+/* Hero component icon fixes */
+.hero-badge-icon {
+  width: 1rem !important; /* 16px */
+  height: 1rem !important; /* 16px */
+  flex-shrink: 0;
+}
+
+.hero-button-icon {
+  width: 1.25rem !important; /* 20px */
+  height: 1.25rem !important; /* 20px */
+  flex-shrink: 0;
+}
+
+/* Enhanced badge styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  transition: all 0.2s ease-in-out;
+}
+
+.badge-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+.badge-success:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+}
+
+/* Code blocks */
+.prism-code {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* JSON tables */
+.json-table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.json-table th {
+  background-color: var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary-darkest);
+  font-weight: 600;
+}
+
+.json-table td {
+  border-color: var(--ifm-color-primary-lightest);
+}
+
+/* Custom button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.btn-secondary {
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Navigation */
+.navbar__brand {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.navbar__item {
+  font-weight: 500;
+}
+
+/* Sidebar */
+.theme-doc-sidebar-container {
+  border-right: 1px solid var(--ifm-color-primary-lightest);
+}
+
+.menu__link {
+  border-radius: 6px;
+  margin: 2px 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu__link:hover {
+  background-color: var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary-darkest);
+}
+
+.menu__link--active {
+  background-color: var(--ifm-color-primary);
+  color: white;
+}
+
+/* Footer */
+.footer {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Mobile-friendly buttons */
+  .btn-primary, .btn-secondary {
+    min-height: 44px;
+    font-size: 1rem;
+  }
+  
+  /* Better mobile spacing */
+  .hero-gradient {
+    padding: 2rem 1rem;
+  }
+  
+  /* Mobile navigation improvements */
+  .navbar__item {
+    margin: 0.25rem 0;
+  }
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .json-table th {
+  background-color: var(--ifm-color-primary-darkest);
+  color: var(--ifm-color-primary-lightest);
+}
+
+[data-theme='dark'] .feature-card {
+  background-color: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-primary-darkest);
+}
+
+[data-theme='dark'] .feature-card:hover {
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.2);
+}
+
+/* Code syntax highlighting */
+.token.comment {
+  color: #6a9955;
+  font-style: italic;
+}
+
+.token.string {
+  color: #ce9178;
+}
+
+.token.keyword {
+  color: #569cd6;
+}
+
+.token.function {
+  color: #dcdcaa;
+}
+
+.token.class-name {
+  color: #4ec9b0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ifm-background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-primary-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-primary);
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Additional badge variants */
+.badge-warning {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2);
+}
+
+.badge-error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+.badge-info {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.badge-purple {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(124, 58, 237, 0.2);
+}
+
+/* Print styles */
+@media print {
+  .navbar,
+  .footer,
+  .theme-doc-sidebar-container {
+    display: none;
+  }
+  
+  .main-wrapper {
+    margin: 0;
+    max-width: none;
+  }
+}

@@ -1,0 +1,126 @@
+# =============================================================================
+# BUILD & TEST WORKFLOW
+# =============================================================================
+# Purpose: Continuous Integration for MochaAPI Client Library
+# Triggers: Push to main/feature branches, Pull Requests
+# Steps: Checkout → Setup JDK → Cache Gradle → Build → Test
+# Matrix: Java 17 (Temurin)
+# =============================================================================
+
+name: Build & Test
+
+on:
+  # Trigger on push to main branch and feature branches
+  push:
+    branches:
+      - main
+      - 'feature/**'
+  
+  # Trigger on pull requests
+  pull_request:
+    branches:
+      - main
+  
+  # Allow manual workflow dispatch
+  workflow_dispatch:
+
+# Cancel previous runs if a new commit is pushed
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Build and test the MochaAPI Client library
+  build-and-test:
+    name: Build & Test (Java ${{ matrix.java-version }})
+    
+    # Run on Ubuntu latest for best compatibility
+    runs-on: ubuntu-latest
+    
+    # Matrix strategy for testing multiple Java versions
+    strategy:
+      matrix:
+        java-version: [17]
+        include:
+          - java-version: 17
+            distribution: 'temurin'
+    
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          # Fetch full history for better Git operations
+          fetch-depth: 0
+      
+      # Step 2: Set up Java Development Kit
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v4
+        with:
+          # Use Temurin distribution for better compatibility
+          distribution: ${{ matrix.distribution }}
+          java-version: ${{ matrix.java-version }}
+          # Cache Maven dependencies (Gradle uses Maven repositories)
+          cache: gradle
+      
+      # Step 3: Cache Gradle dependencies for faster builds
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@v4
+        with:
+          # Cache Gradle wrapper and dependencies
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            .gradle
+          # Cache key includes OS, Java version, and Gradle wrapper hash
+          key: ${{ runner.os }}-gradle-${{ matrix.java-version }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          # Restore from cache if no exact match
+          restore-keys: |
+            ${{ runner.os }}-gradle-${{ matrix.java-version }}-
+            ${{ runner.os }}-gradle-
+      
+      # Step 4: Make Gradle wrapper executable
+      - name: Make Gradle Wrapper Executable
+        run: chmod +x ./gradlew
+        shell: bash
+      
+      # Step 5: Run Gradle build and tests
+      - name: Build and Test
+        run: ./gradlew clean build test
+        shell: bash
+        env:
+          # Set Gradle options for better CI performance
+          GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
+      
+      # Step 6: Upload test results (if any test failures occur)
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: always() # Run even if tests fail
+        with:
+          name: test-results-java-${{ matrix.java-version }}
+          path: |
+            build/test-results/
+            build/reports/
+          retention-days: 7
+      
+      # Step 7: Upload build artifacts
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        if: success() # Only upload on successful build
+        with:
+          name: build-artifacts-java-${{ matrix.java-version }}
+          path: |
+            build/libs/
+            build/distributions/
+          retention-days: 7
+      
+      # Step 8: Generate build summary
+      - name: Build Summary
+        if: always()
+        run: |
+          echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Java Version**: ${{ matrix.java-version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Distribution**: ${{ matrix.distribution }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **OS**: ${{ runner.os }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Build Time**: $(date)" >> $GITHUB_STEP_SUMMARY
