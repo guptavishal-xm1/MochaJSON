@@ -1,0 +1,108 @@
+{
+  "name": "MochaJSON Documentation",
+  "short_name": "MochaJSON",
+  "description": "Unified HTTP + JSON Client for Java & Kotlin - Documentation",
+  "start_url": "/MochaJSON/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait-primary",
+  "scope": "/MochaJSON/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["developer", "documentation", "programming"],
+  "icons": [
+    {
+      "src": "/MochaJSON/img/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/MochaJSON/img/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/MochaJSON/img/MochaLogo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/MochaJSON/img/MochaLogo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/MochaJSON/img/social-preview.png",
+      "sizes": "1280x640",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "MochaJSON Documentation Homepage"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Getting Started",
+      "short_name": "Start",
+      "description": "Quick start guide for MochaJSON",
+      "url": "/MochaJSON/getting-started",
+      "icons": [
+        {
+          "src": "/MochaJSON/img/favicon.ico",
+          "sizes": "32x32"
+        }
+      ]
+    },
+    {
+      "name": "API Reference",
+      "short_name": "API",
+      "description": "Complete API documentation",
+      "url": "/MochaJSON/api/overview",
+      "icons": [
+        {
+          "src": "/MochaJSON/img/favicon.ico",
+          "sizes": "32x32"
+        }
+      ]
+    },
+    {
+      "name": "Java Examples",
+      "short_name": "Java",
+      "description": "Java usage examples",
+      "url": "/MochaJSON/usage/java-examples",
+      "icons": [
+        {
+          "src": "/MochaJSON/img/favicon.ico",
+          "sizes": "32x32"
+        }
+      ]
+    },
+    {
+      "name": "Kotlin Examples",
+      "short_name": "Kotlin",
+      "description": "Kotlin usage examples",
+      "url": "/MochaJSON/usage/kotlin-examples",
+      "icons": [
+        {
+          "src": "/MochaJSON/img/favicon.ico",
+          "sizes": "32x32"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "web",
+      "url": "https://guptavishal-xm1.github.io/MochaJSON/"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}
